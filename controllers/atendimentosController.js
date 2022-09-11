@@ -12,6 +12,20 @@ const AtendimentosController = {
         });
         return res.status(201).json(newAtendimento);
     },
+
+    getAtendimento : async (req,res)=>{
+        const {id} = req.params;
+
+        const atendimentoID = await Atendimentos.findByPk(id);
+        return res.json(atendimentoID)
+    },
+    delAtendimento: async(req,res) =>{
+        const {id} = req.params;
+        const atendimentoID = await Atendimentos.findByPk(id);
+        atendimentoID.destroy();
+        res.status(204).json(atendimentoID);
+    }
+    
 };
 
 module.exports = AtendimentosController;
