@@ -20,10 +20,15 @@ const Atendimentos = db.define ("Atendimentos",{
         fk_paciente: {
             type: sequelize.DataTypes.INTEGER
         },
+        createdAt : {
+            type: sequelize.DataTypes.DATE
+        },
+        updatedAt : {
+            type: sequelize.DataTypes.DATE
+        }
     },
     {
-        tableName: "atendimentos",
-        timestamps: false,
+        tableName: "atendimentos"
     }
 );
 

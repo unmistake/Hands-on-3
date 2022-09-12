@@ -21,10 +21,15 @@ const Psicologos = db.define ("Psicologos",{
         apresentacao: {
             type: sequelize.DataTypes.TEXT,
         },
+        createdAt : {
+            type: sequelize.DataTypes.DATE
+        },
+        updatedAt : {
+            type: sequelize.DataTypes.DATE
+        }
     },
     {
-        tableName: "psicologos",
-        timestamps: false
+        tableName: "psicologos"
     }
 );
 

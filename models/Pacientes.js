@@ -17,11 +17,16 @@ const Pacientes = db.define ("Pacientes",{
         },
         idade: {
             type: sequelize.DataTypes.DATE
-        } 
+        },
+        createdAt : {
+            type: sequelize.DataTypes.DATE
+        },
+        updatedAt : {
+            type: sequelize.DataTypes.DATE
+        }
     },
     {
-        tableName: "pacientes",
-        timestamps: false
+        tableName: "pacientes"
     }
 );
 

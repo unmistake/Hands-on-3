@@ -12,6 +12,18 @@ const PacientesController = {
         });
         return res.status(201).json(newPaciente);
     },
+    getPaciente : async (req,res)=>{
+        const {id} = req.params;
+
+        const pacienteID = await Pacientes.findByPk(id);
+        return res.json(pacienteID)
+    },
+    delPaciente: async(req,res) =>{
+        const {id} = req.params;
+        const pacienteID = await Pacientes.findByPk(id);
+        pacienteID.destroy();
+        res.status(204).json(pacienteID);
+    },
 };
 
 module.exports = PacientesController;
