@@ -1,5 +1,5 @@
-
 const sequelize = require ('sequelize');
+const { Psicologos } = require('.');
 const db = require ('../database/index')
 
 const Atendimentos = db.define ("Atendimentos",{
@@ -15,10 +15,18 @@ const Atendimentos = db.define ("Atendimentos",{
             type: sequelize.DataTypes.TEXT,
         },
         fk_psicologo: {
-            type: sequelize.DataTypes.INTEGER
+            type: sequelize.DataTypes.INTEGER,
+            references: {
+                model: Psicologos,
+                key: "id_psicologo",
+            },
         },
         fk_paciente: {
-            type: sequelize.DataTypes.INTEGER
+            type: sequelize.DataTypes.INTEGER,
+            references: {
+                model: Pacientes,
+                key: "id_paciente",
+            },
         },
     },
     {
