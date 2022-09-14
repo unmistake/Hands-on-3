@@ -1,4 +1,5 @@
 const {Atendimentos, Psicologos, Pacientes} = require ("../models/index");
+
 const AtendimentosController = {
     listAll : async (req,res) =>{
         const atendimentos = await Atendimentos.findAll({
@@ -10,11 +11,10 @@ const AtendimentosController = {
         const {id_atendimento, data_atendimento, observacao, id_psicologo, id_paciente} = req.body;
 
         const newAtendimento = await Atendimentos.create({
-            id_atendimento, data_atendimento, observacao, id_psicologo, id_paciente,
+             id_atendimento, data_atendimento, observacao, id_psicologo, id_paciente,
         });
+
         return res.status(201).json(newAtendimento);
-
-
     },
 
     getAtendimento : async (req,res)=>{
