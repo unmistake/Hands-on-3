@@ -1,5 +1,6 @@
 const express = require('express');
 const AtendimentosController = require('../controllers/atendimentosController');
+const countController = require('../controllers/countController');
 const PacientesController = require('../controllers/pacientesController');
 const PsicologosController = require('../controllers/psicologosController');
 const routes = express.Router();
@@ -27,5 +28,7 @@ routes.post("/criar/psicologo", PsicologosController.createPsicologos);
 routes.delete("/deletar/psicologo/:id", PsicologosController.delPsicologo);
 routes.put("/atualizar/psicologo/:id", PsicologosController.attPsicologo)
 
+//count
+routes.get("/contador", countController.countAll);
 
 module.exports = routes;

@@ -2,7 +2,7 @@ const Psicologos = require ("../models/Psicologos");
 const PsicologosController = {
     listAll : async (req,res) =>{
         const psicologos = await Psicologos.findAll();
-        return res.json(psicologos);
+        return res.status(200).json(psicologos);
     },
     createPsicologos : async (req, res) => {
         const {id_psicologo, nome, email, senha, apresentacao} = req.body;
@@ -16,11 +16,16 @@ const PsicologosController = {
         });
         return res.status(201).json(newPsicologo);
     },
+    NullReferenceException: (id) => {this.id = id},
+
     getPsicologo : async (req,res)=>{
         const {id} = req.params;
-
         const psicologoID = await Psicologos.findByPk(id);
-        return res.json(psicologoID)
+        if (psicologoID == true){
+            return res.status(200).json(psicologoID)
+        }else {
+            res.status(404).json("Psicólogo: "+ id+ " não encontrado.")  
+        }   
     },
     delPsicologo: async(req,res) =>{
         const {id} = req.params;
@@ -46,7 +51,7 @@ const PsicologosController = {
                 },
             }
         );
-        res.json ("Psicologo atualizado com sucesso.")
+        res.status(200).json("Psicologo atualizado com sucesso.")
     }
 };
 
