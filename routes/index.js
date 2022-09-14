@@ -29,6 +29,10 @@ routes.delete("/deletar/psicologo/:id", PsicologosController.delPsicologo);
 routes.put("/atualizar/psicologo/:id", PsicologosController.attPsicologo)
 
 //count
-routes.get("/contador", countController.countAll);
+routes.get("/dashboard", countController.countAll);
+routes.get("/dashboard/numero-paciente", countController.countPaciente);
+routes.get("/dashboard/numero-psicologo", countController.countPsicologo);
+routes.get("/dashboard/numero-atendimento", countController.countAtendimento);
+
 
 module.exports = routes;

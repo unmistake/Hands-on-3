@@ -1,7 +1,11 @@
+const e = require("express");
+const { Atendimentos } = require("../models");
 const Psicologos = require ("../models/Psicologos");
 const PsicologosController = {
     listAll : async (req,res) =>{
-        const psicologos = await Psicologos.findAll();
+        const psicologos = await Psicologos.findAll({
+            include: [ { model: Atendimentos, as: 'Atendimentos' }],
+        });
         return res.status(200).json(psicologos);
     },
     createPsicologos : async (req, res) => {
@@ -16,16 +20,20 @@ const PsicologosController = {
         });
         return res.status(201).json(newPsicologo);
     },
-    NullReferenceException: (id) => {this.id = id},
 
     getPsicologo : async (req,res)=>{
-        const {id} = req.params;
-        const psicologoID = await Psicologos.findByPk(id);
-        if (psicologoID == true){
-            return res.status(200).json(psicologoID)
-        }else {
-            res.status(404).json("Psicólogo: "+ id+ " não encontrado.")  
-        }   
+        try{
+            const {id} = req.params;
+            const psicologoID = await Psicologos.findByPk(id);
+            if (psicologoID != null){
+                return res.status(200).json(psicologoID)
+                
+            }else {
+                res.status(404).json("Psicólogo "+ id+ " não encontrado.")
+            }
+            }catch (e) {
+                throw e;
+            }
     },
     delPsicologo: async(req,res) =>{
         const {id} = req.params;

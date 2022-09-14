@@ -18,6 +18,9 @@ Psicologos.belongsTo(Atendimentos, {
 Atendimentos.hasMany(Psicologos, {
   foreignKey: "id_psicologo",
 });
+Psicologos.hasMany(Atendimentos,{
+  foreignKey:"id_psicologo",
+});
 
 
 

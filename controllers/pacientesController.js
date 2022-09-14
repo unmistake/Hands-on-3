@@ -16,10 +16,18 @@ const PacientesController = {
         return res.status(201).json(newPaciente);
     },
     getPaciente : async (req,res)=>{
-        const {id} = req.params;
-
-        const pacienteID = await Pacientes.findByPk(id);
-        return res.json(pacienteID)
+        try{
+            const {id} = req.params;
+            const pacienteID = await Pacientes.findByPk(id);
+            if (pacienteID != null){
+                return res.status(200).json(pacienteID)
+                
+            }else {
+                res.status(404).json("Paciente "+ id+ " não encontrado.")
+            }
+            }catch (e) {
+                throw e;
+            }
     },
     delPaciente: async(req,res) =>{
         const {id} = req.params;

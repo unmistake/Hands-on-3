@@ -18,10 +18,18 @@ const AtendimentosController = {
     },
 
     getAtendimento : async (req,res)=>{
-        const {id} = req.params;
-
-        const atendimentoID = await Atendimentos.findByPk(id);
-        return res.json(atendimentoID)
+        try{
+            const {id} = req.params;
+            const atendimentoID = await Atendimentos.findByPk(id);
+            if (atendimentoID != null){
+                return res.status(200).json(atendimentoID)
+                
+            }else {
+                res.status(404).json("Atendimento "+ id+ " não encontrado.")
+            }
+            }catch (e) {
+                throw e;
+            }
     },
     delAtendimento: async(req,res) =>{
         const {id} = req.params;
