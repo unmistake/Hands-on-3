@@ -5,10 +5,13 @@ const PacientesController = {
         return res.json(pacientes);
     },
     createPacientes : async (req, res) => {
-        const {paciente} = req.body;
+        const {id_paciente, nome, email, idade} = req.body;
 
         const newPaciente = await Pacientes.create({
-            paciente,
+            id_paciente, 
+            nome,
+            email, 
+            idade
         });
         return res.status(201).json(newPaciente);
     },
@@ -24,6 +27,25 @@ const PacientesController = {
         pacienteID.destroy();
         res.status(204).json(pacienteID);
     },
+    attPaciente: async (req,res) => {
+        const {id} = req.params;
+        const {id_paciente, nome, email, idade} = req.body;
+        
+        pacientesAtt = await Pacientes.update(
+            {
+                id_paciente, 
+                nome,
+                email, 
+                idade
+            },
+            {
+                where: {
+                    id_paciente: id
+                },
+            }
+        );
+        res.json ("Paciente atualizado com sucesso.")
+    }
 };
 
 module.exports = PacientesController;

@@ -5,10 +5,14 @@ const PsicologosController = {
         return res.json(psicologos);
     },
     createPsicologos : async (req, res) => {
-        const {psicologo} = req.body;
+        const {id_psicologo, nome, email, senha, apresentacao} = req.body;
 
         const newPsicologo = await Psicologos.create({
-            psicologo,
+            id_psicologo, 
+            nome,
+            email, 
+            senha, 
+            apresentacao,
         });
         return res.status(201).json(newPsicologo);
     },
@@ -24,6 +28,26 @@ const PsicologosController = {
         psicologoID.destroy();
         res.status(204).json(psicologoID);
     },
+    attPsicologo: async (req,res) => {
+        const {id} = req.params;
+        const {id_psicologo, nome, email, senha, apresentacao} = req.body;
+        
+        psicologoAtt = await Psicologos.update(
+            {
+                id_psicologo, 
+                nome,
+                email, 
+                senha, 
+                apresentacao
+            },
+            {
+                where: {
+                    id_psicologo: id
+                },
+            }
+        );
+        res.json ("Psicologo atualizado com sucesso.")
+    }
 };
 
 module.exports = PsicologosController;
