@@ -3,7 +3,7 @@ const {hasConnection} = require ("../database")
 const routes = require('../routes');
 const app = express ();
 
-//hasConnection();
+hasConnection();
 app.use(express.json());
 app.use(routes);
 

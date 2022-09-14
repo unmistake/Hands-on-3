@@ -1,6 +1,8 @@
 
 const sequelize = require ('sequelize');
-const db = require ('../database/index')
+const db = require ('../database/index');
+const Pacientes = require('./Pacientes');
+const Psicologos = require('./Psicologos');
 
 const Atendimentos = db.define ("Atendimentos",{
         id_atendimento: {
@@ -14,11 +16,19 @@ const Atendimentos = db.define ("Atendimentos",{
         observacao: {
             type: sequelize.DataTypes.TEXT,
         },
-        fk_psicologo: {
-            type: sequelize.DataTypes.INTEGER
+        id_psicologo: {
+            type: sequelize.DataTypes.INTEGER,
+            references: {
+                model: Psicologos,
+                key: 'id',
+            }
         },
-        fk_paciente: {
-            type: sequelize.DataTypes.INTEGER
+        id_paciente: {
+            type: sequelize.DataTypes.INTEGER,
+            references:{
+                model: Pacientes,
+                key: 'id',
+            },
         },
         createdAt : {
             type: sequelize.DataTypes.DATE
@@ -28,7 +38,7 @@ const Atendimentos = db.define ("Atendimentos",{
         }
     },
     {
-        tableName: "atendimentos"
+        tableName: "atendimentos",
     }
 );
 
