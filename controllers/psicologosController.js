@@ -1,18 +1,21 @@
 const Psicologos = require ("../models/Psicologos");
+const bcrypt = require('bcrypt');
+
 const PsicologosController = {
-    listAll : async (req,res) =>{
+    listAll : async (req, res) =>{
         const psicologos = await Psicologos.findAll();
         return res.status(200).json(psicologos);
     },
     createPsicologos : async (req, res) => {
-        const {id_psicologo, nome, email, senha, apresentacao} = req.body;
+        const {nome, email, senha, apresentacao} = req.body;     // id_psicologo é auto increment no banco de dados. Não é necessário tê-lo aqui.
+
+        newPassword = bcrypt.hashSync(senha, 10);
 
         const newPsicologo = await Psicologos.create({
-            id_psicologo, 
-            nome,
+            nome, 
             email, 
-            senha, 
-            apresentacao,
+            senha: newPassword,
+            apresentacao
         });
         return res.status(201).json(newPsicologo);
     },

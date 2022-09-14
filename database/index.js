@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 
 const DB_NAME = "lavie";
 const DB_USER = "root";
-const DB_PASS = "Root@123";
+const DB_PASS = "88813091a";
 const DB_CONFIG = {
   dialect: "mysql",
   host: "localhost",
@@ -19,7 +19,7 @@ try {
   console.error("Error ao tentar uma conexão com banco dados");
 }
 
-async function hasConection() {
+async function hasConnection() {
   try {
     await db.authenticate();
     console.log("Banco dados conectado!");
@@ -30,7 +30,7 @@ async function hasConection() {
 }
 
 Object.assign(db, {
-  hasConection,
+  hasConnection,
 }); //db.hasConection = hasConection
 
 module.exports = db;

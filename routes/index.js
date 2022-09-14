@@ -3,6 +3,7 @@ const AtendimentosController = require('../controllers/atendimentosController');
 const countController = require('../controllers/countController');
 const PacientesController = require('../controllers/pacientesController');
 const PsicologosController = require('../controllers/psicologosController');
+const authController = require('../controllers/authController');
 const routes = express.Router();
 
 //rota pacientes
@@ -27,6 +28,9 @@ routes.get("/listar/psicologo/:id", PsicologosController.getPsicologo);
 routes.post("/criar/psicologo", PsicologosController.createPsicologos);
 routes.delete("/deletar/psicologo/:id", PsicologosController.delPsicologo);
 routes.put("/atualizar/psicologo/:id", PsicologosController.attPsicologo)
+
+// LOGIN
+routes.post('/login', authController.login);
 
 //count
 routes.get("/contador", countController.countAll);
